@@ -1,0 +1,6 @@
+Contribute
+Contributions are welcome. Please open an issue or a pull request on GitHub.
+
+### Go Test Example #### Example `test_keylogger.go` ```go package main import "testing" func TestKeylogger(t *testing.T) { // Create a temporary file for testing tempFile, err := ioutil.TempFile("", "keylog_test.txt") if err != nil { t.Fatalf("Failed to create temporary file: %v", err) } defer os.Remove(tempFile.Name()) // Start the keylogger with the temporary file go func() { keylogger := Keylogger{logFile: tempFile} keylogger.Start() }() // Simulate key presses simulateKeyPresses() // Wait for a short period to allow keylogger to capture keys time.Sleep(2 * time.Second) // Read the contents of the temporary file contents, err := ioutil.ReadFile(tempFile.Name()) if err != nil { t.Fatalf("Failed to read temporary file: %v", err) } // Check if the expected keys are recorded expectedKeys := "abc" if string(contents) != expectedKeys { t.Errorf("Expected keys %s, but got %s", expectedKeys, string(contents)) } } func simulateKeyPresses() { // Simulate key presses using a tool or library // This is a placeholder for the actual simulation code }
+Warning
+This keylogger can be used for penetration testing on systems you own or have permission to test. Use it responsibly and ethically.
